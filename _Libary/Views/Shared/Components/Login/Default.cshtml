@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Microsoft.Extensions.Configuration
+@inject IHttpContextAccessor _contextAccessor
+
+<ul style="list-style: none;">
+    @if (ViewBag.UserId == null)
+    {
+        <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+        <li @*class="nav-item"*@>
+            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+        </li>
+       
+        </ul>
+        </div>
+       
+
+
+
+
+    }
+    else
+    {
+        <li class="row pt-2">
+            <div class="col">
+                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+
+            </div>
+            <div class="col">
+                @{
+                    var userName = _contextAccessor.HttpContext.Session.GetString("UserName");
+                }
+
+                <span class="text-nowrap"> Welcome @userName</span>
+               
+            </div>
+        </li>
+
+    }
+</ul>

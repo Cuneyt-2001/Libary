@@ -1,0 +1,60 @@
+﻿@model _Libary.Models.ReviewViewModel
+
+
+@{
+    ViewData["Title"] = "AddReview";
+}
+
+<h1>AddReview</h1>
+
+<h4>ReviewViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+    <div class="container">
+    @{
+        if (ViewBag.Success != null && ViewBag.Success == true)
+        {
+            <div class="alert alert-success">@ViewBag.Message</div>
+        }
+        else if (ViewBag.Success != null && ViewBag.Success == false)
+        {
+            <div class="alert alert-danger">@ViewBag.Message</div>
+        }
+
+    }
+
+</div>
+        <form asp-action="AddReview">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              <div class="form-group">
+             @*   <label asp-for="BookID" class="control-label" ></label>*@
+                <input type="hidden" asp-for="BookID"  class="form-control" />
+                <span asp-validation-for="BookID" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
+                <label asp-for="UserID" class="control-label" ></label>
+                <input asp-for="UserID"  class="form-control" />
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>*@
+              <div class="form-group">
+                <label class="control-label">Book Title</label>
+                <input class="form-control"  value="@ViewBag.BookTitle" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Review" class="control-label"></label>
+                <input asp-for="Review" class="form-control "/>
+                <span asp-validation-for="Review" class="text-danger"></span>
+            </div>
+        
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a  asp-action="Index"  asp-controller="Loan">Back to List</a>
+</div>
+

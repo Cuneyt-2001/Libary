@@ -1,0 +1,80 @@
+﻿@model _Libary.Models.BookViewModel
+
+@{
+    ViewData["Title"] = "UpdateBook";
+}
+
+<h1>UpdateBook</h1>
+
+<h4>BookViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="UpdateBook">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @* <label asp-for="BookID" class="control-label"></label>*@
+                <input type="hidden" asp-for="BookID" class="form-control" />
+                <span asp-validation-for="BookID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ISBN" class="control-label"></label>
+                <input asp-for="ISBN" required class="form-control" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookTitle" class="control-label"></label>
+                <input asp-for="BookTitle" required class="form-control" />
+                <span asp-validation-for="BookTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Publisher" class="control-label"></label>
+                <input asp-for="Publisher" required class="form-control" />
+                <span asp-validation-for="Publisher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Author" class="control-label"></label>
+                <input asp-for="Author" required class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Categories</label>
+                <select name="categoryIds" multiple class="form-control">
+
+                    @{
+
+                        foreach (var item in ViewBag.Categories)
+                        {
+                            if (Model.Categories.Any(a => a.CategoryID == item.CategoryID))
+                            {
+                                <option selected="selected" value="@item.CategoryID"> @item.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@item.CategoryID"> @item.CategoryName</option>
+
+                            }
+                        }
+
+                    }
+
+
+                </select>
+                @* <span asp-validation-for="Category" class="text-danger"></span>*@
+            </div>
+            @* <div class="form-group">
+                <label asp-for="Category" class="control-label"></label>
+                <input asp-for="Category" required class="form-control" />
+                <span asp-validation-for="Category" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

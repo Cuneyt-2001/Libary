@@ -1,0 +1,113 @@
+﻿@model IEnumerable<_Libary.Models.BookViewModel>
+
+@{
+    ViewData["Title"] = "ListofBooks";
+
+}
+
+
+<h1>ListofBooks</h1>
+
+<p>
+    <a asp-action="AddBook">Create New</a>
+</p>
+<div class="container">
+    @{
+        if (ViewBag.Success != null && ViewBag.Success == true)
+        {
+            <div class="alert alert-success">@ViewBag.Message</div>
+        }
+        else if (ViewBag.Success != null && ViewBag.Success == false)
+        {
+            <div class="alert alert-danger">@ViewBag.Message</div>
+        }
+
+    }
+
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+          @*  <th>
+                @Html.DisplayNameFor(model => model.BookID)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                Categories
+            </th>
+            <th>
+                Operations
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @using (Html.BeginForm("Index", "Book", FormMethod.Post))
+        {
+            <p>
+                <strong>BookTitel: </strong> @Html.TextBox("BookTitel")
+                <input type="submit" value="Search" class="btn btn-success" />
+            </p>
+        }
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+               @* <td>
+                    @Html.DisplayFor(modelItem => item.BookID)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @{
+                        if (item.Categories != null)
+                        {
+                            foreach (var cat in item.Categories)
+                            {
+                                if (item.Categories.LastIndexOf(cat) < item.Categories.Count() - 1)
+                                {
+                                    <span>@cat.CategoryName,</span>
+                                }
+                                else
+                                {
+                                    <span>@cat.CategoryName</span>
+
+                                }
+                            }
+                        }
+
+                    }
+                </td>
+                <td>
+                    <a asp-action="RemoveBook" asp-route-id="@item.BookID" class="btn btn-danger">Delete</a>
+                    <a asp-action="UpdateBook" asp-route-id="@item.BookID" class="btn btn-info">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
