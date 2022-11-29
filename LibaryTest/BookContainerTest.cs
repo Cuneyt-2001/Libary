@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 namespace LibaryTest
 {
     [TestClass]
-   public class BookContainerTest
+    public class BookContainerTest
     {
-        
-        
+
+
         [TestMethod]
         public void AddBookTest()
         {
@@ -29,13 +29,13 @@ namespace LibaryTest
                 ISBN = 1234,
                 Author = "Cuneytt",
                 Publisher = "Terkeslii",
-               
+
             };
 
-           
+
             //Act
 
-           bookContainer.AddBook(book);
+            bookContainer.AddBook(book);
             var result = bookContainerMock.books.Count;
 
             //Assert
@@ -46,7 +46,7 @@ namespace LibaryTest
             Assert.AreEqual(book.Author, bookContainerMock.books.Last().Author);
             Assert.AreEqual(book.Publisher, bookContainerMock.books.Last().Publisher);
 
-          
+
 
 
 
@@ -57,7 +57,7 @@ namespace LibaryTest
             //Arrange
             BookContainerMock bookContainerMock = new BookContainerMock();
             BookContainer bookContainer = new BookContainer(bookContainerMock);
-           
+
 
 
             //Act
@@ -67,8 +67,8 @@ namespace LibaryTest
 
             //Assert
             Assert.AreEqual(bookContainerMock.GetBooks().Count(), books.Count); ;
-            Assert.AreEqual(2,books.Count) ;
-            Assert.AreEqual(books[0].BookID,bookContainerMock.books[0].BookID);
+            Assert.AreEqual(2, books.Count);
+            Assert.AreEqual(books[0].BookID, bookContainerMock.books[0].BookID);
             Assert.AreEqual(books[0].BookTitle, bookContainerMock.books[0].BookTitle);
             Assert.AreEqual(books[0].Author, bookContainerMock.books[0].Author);
             Assert.AreEqual(books[0].Publisher, bookContainerMock.books[0].Publisher);
@@ -85,14 +85,14 @@ namespace LibaryTest
             //Arrange
             BookContainerMock bookContainerMock = new BookContainerMock();
             BookContainer bookContainer = new BookContainer(bookContainerMock);
-            var booklist= bookContainer.GetBooks();
+            var booklist = bookContainer.GetBooks();
             var deletebook = booklist[0];
             //Act
             bookContainer.RemoveBook(deletebook.BookID);
             //Assert
             Assert.AreEqual(1, bookContainerMock.books.Count);
-          
-          
+
+
 
 
         }
@@ -103,11 +103,11 @@ namespace LibaryTest
             BookContainerMock bookContainerMock = new BookContainerMock();
             BookContainer bookContainer = new BookContainer(bookContainerMock);
             var booklist = bookContainer.GetBooks();
-            var getbook= booklist[0];   
+            var getbook = booklist[0];
             //Act
             bookContainer.GetBook(getbook.BookID);
             //
-            Assert.AreEqual(1,getbook.BookID);
+            Assert.AreEqual(1, getbook.BookID);
             Assert.AreEqual(getbook.BookTitle, bookContainerMock.books[0].BookTitle);
 
 
@@ -122,10 +122,10 @@ namespace LibaryTest
             var booklist = bookContainer.GetBooks();
             var searchbook = booklist[1];
             //Act
-          var booktitel=  bookContainer.SearchBook(searchbook.BookTitle);
+            var booktitel = bookContainer.SearchBook(searchbook.BookTitle);
             //Assert
-            Assert.AreEqual(1,booktitel.Count);
-            
+            Assert.AreEqual(1, booktitel.Count);
+
 
         }
 
@@ -135,8 +135,6 @@ namespace LibaryTest
             //Arrange
 
             BookContainerMock bookContainerMock = new BookContainerMock();
-           // Book book=new Book(bookContainerMock);
-          //  BookContainer bookContainer = new BookContainer(bookContainerMock);
             Book book2 = new Book(bookContainerMock)
             {
                 BookID = 1,
@@ -151,14 +149,14 @@ namespace LibaryTest
             //Act
 
             book2.EditBook(book2);
-           
+
 
             //Assert
-           Assert.AreEqual(book2.Author, bookContainerMock.books[1].Author);   
+            Assert.AreEqual(book2.Author, bookContainerMock.books[1].Author);
             Assert.AreEqual(book2.BookID, bookContainerMock.books[1].BookID);
-          
-           
-           
+
+
+
 
 
 

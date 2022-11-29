@@ -13,7 +13,7 @@ namespace Interfaces.IDAL
         //List<BookDTO> GetAllBooks();
         //List<BookDTO> SearchBook(string booktitle);
         //BookDTO GetBook(int bookid);
-        bool CheckAvailibilityofBook(LoanDTO loan);
+        List<LoanDTO> CheckAvailibilityofBook(LoanDTO loan);
         List<LoanDTO> GetAllLoans();
         List<LoanDTO> GetLoansByUser(int userid);
         

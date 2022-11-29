@@ -50,7 +50,7 @@ namespace LibaryTest
         /* completed!  */
         public bool AddBookCategory(int CategoryID, int BookID)
         {
-           // BookCategoryDTO bookCategoryDTO= bookcategories.Find(c => c.BookID == BookID /*&& BookID==c.BookID*/);
+          
             BookCategoryDTO bookcategory = new BookCategoryDTO
             {
                 CategoryID = CategoryID,
@@ -79,11 +79,6 @@ namespace LibaryTest
         public List<CategoryDTO> GetAllCategoriesByIds(List<int> ids)
         {
           
-            ////ids.Add(1); 
-            ////ids.Add(2);
-            //CategoryDTO categoryToFind = categories.Find(x => x.CategoryID ==ids) ;
-            //categories.Add();
-            //return categories;
             throw new NotImplementedException();    
         }
         /* completed ! */
@@ -98,7 +93,6 @@ namespace LibaryTest
         public int UpdateBookCategory(BookCategoryDTO bookCategoryDTO)
         {
             BookCategoryDTO bookcategorydto = bookcategories.First(x => x.BookID == bookCategoryDTO.BookID);
-           // bookcategories.Remove(bookcategorydto);
             bookcategories.Add(bookCategoryDTO);
             return bookcategories.Count();  
         }

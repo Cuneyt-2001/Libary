@@ -37,56 +37,44 @@ namespace LibaryTest
             Loans.Add(loan1);
             Loans.Add(loan2);
 
-    }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="loan"></param>
-        /// <returns></returns>
+        }
+
         public bool AddLoan(LoanDTO loan)
         {
-          var result=  CheckAvailibilityofBook(loan);
+            var result = CheckAvailibilityofBook(loan);
             if (result == true)
             {
                 Loans.Add(loan);
             }
             return false;
-          
+
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="loan"></param>
-        /// <returns></returns>
+
         public bool CheckAvailibilityofBook(LoanDTO loan)
         {
             LoanDTO loanDTO = Loans.Find(x => x.BookID == loan.BookID);
-            //if (loanDTO==null)
-            //{
-            //    return true;
-            //}
-            var result = loanDTO.ReturnDate <loan.LoanDate;
-            //if (result == true)
-            //{
-            //    {
-            //        Loans.Add(loan);
-            //    }
-            //}
-            return result; 
+            var result = loanDTO.ReturnDate < loan.LoanDate;
+            return result;
 
 
         }
 
         public List<LoanDTO> GetAllLoans()
         {
-            return Loans;   
+            return Loans;
         }
-       public List<LoanDTO> GetLoansByUser(int userid)
+        public List<LoanDTO> GetLoansByUser(int userid)
         {
-            throw new NotImplementedException();    
+            List<LoanDTO> loansbyuser = Loans.FindAll(x => x.UserID == userid);
+            return loansbyuser;
 
 
+        }
+
+        List<LoanDTO> ILoanContainerDAL.CheckAvailibilityofBook(LoanDTO loan)
+        {
+            throw new NotImplementedException();
         }
     }
 }

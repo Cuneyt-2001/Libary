@@ -28,31 +28,42 @@ namespace Business
             return _loanContainerDAL.AddLoan(loanDTO);
 
         }
-       
+
         public bool CheckAvailibilityofBook(Loan loan)
         {
-            
-            LoanDTO loanDTO=new LoanDTO();
-            loanDTO.BookID=loan.BookID;
-            loanDTO.LoanDate=loan.LoanDate;
-            loanDTO.ReturnDate=loan.ReturnDate;
-       
+            LoanDTO loanDTO = new LoanDTO();
+            loanDTO.BookID = loan.BookID;
+            loanDTO.LoanDate = loan.LoanDate;
+            loanDTO.ReturnDate = loan.ReturnDate;
 
-            var avalibility= _loanContainerDAL.CheckAvailibilityofBook(loanDTO);
             TimeSpan timeSpan = loanDTO.ReturnDate - loanDTO.LoanDate;
-            if(avalibility == true&&loanDTO.LoanDate>=DateTime.Now.Date&&loanDTO.ReturnDate>=DateTime.Now.Date&&loanDTO.LoanDate.Date<=loanDTO.ReturnDate&&timeSpan.Days<=20)
+            if (!(loanDTO.LoanDate >= DateTime.Now.Date && loanDTO.ReturnDate >= DateTime.Now.Date && loanDTO.LoanDate.Date <= loanDTO.ReturnDate && timeSpan.Days <= 20))
             {
 
-                return true;    
+                return false;
             }
-            return false;
-
+            //in plaats van deze
+            var count = _loanContainerDAL.CheckAvailibilityofBook(loanDTO);
+            foreach(var c in count)
+            {
+                if (( loan.LoanDate >= c.LoanDate && loan.LoanDate <= c.ReturnDate) || (loan.ReturnDate >= c.LoanDate && loan.ReturnDate <= c.ReturnDate))
+                {
+                    return false;
+                }
+            }
+            //daaronder
+            //var allLoans = _loanContainerDAL.GetAllLoans();
+            //if (allLoans.Any(a => a.BookID == loan.BookID && ((loan.LoanDate >= a.LoanDate && loan.LoanDate <= a.ReturnDate) || (loan.ReturnDate >= a.LoanDate && loan.ReturnDate <= a.ReturnDate))))
+            //{
+            //    return false;
+            //}
+            return true;
         }
 
         public List<Loan> GetAllLoans()
         {
 
-            List<LoanDTO> loandtos=_loanContainerDAL.GetAllLoans();
+            List<LoanDTO> loandtos = _loanContainerDAL.GetAllLoans();
             List<Loan> loanlist = new List<Loan>();
             foreach (LoanDTO loandto in loandtos)
             {

@@ -63,10 +63,8 @@ namespace LibaryTest
             //Act
 
             var users = userContainer.GetAllUsers();
-           // var result = userContainerMock.users.Count;
 
             //Assert
-            //Assert.AreEqual(2, result);
             Assert.AreEqual(userContainerMock.users.Count, users.Count); ;
 
 
@@ -85,12 +83,7 @@ namespace LibaryTest
 
 
             //Act
-            //var userlist = userContainer.GetAllUsers();
-            //var getusertype = userlist[1];
-
-
-
-            var result =  userContainer.GetUserType("Tim@gmail.com");
+            var result = userContainer.GetUserType("Tim@gmail.com");
 
 
 
@@ -107,19 +100,15 @@ namespace LibaryTest
             UserContainerMock userContainerMock = new UserContainerMock();
 
             UserContainer userContainer = new(userContainerMock);
-            //var userlist = userContainer.GetAllUsers();
-            //var getuserbyemail = userlist[0];
 
 
             //Act
-           /* userContainer.GetUserIdByEmail(getuserbyemail.Email)*/;
             var result = userContainer.GetUserIdByEmail("Tim@gmail.com");
 
 
 
 
             //Assert
-            //  Assert.AreEqual(getuserbyemail.UserID, userContainerMock.users[0].UserID);
             Assert.AreEqual(result, userContainerMock.users[1].UserID);
         }
 
@@ -133,18 +122,14 @@ namespace LibaryTest
             UserContainerMock userContainerMock = new UserContainerMock();
 
             UserContainer userContainer = new(userContainerMock);
-            //var userlist = userContainer.GetAllUsers();
-            //var getusernamebyemail = userlist[1];
 
 
             //Act
-            // userContainer.GetUserIdByEmail(getusernamebyemail.Email);
             var result = userContainer.GetUserNameByEmail("Tim@gmail.com");
 
 
             //Assert
             Assert.AreEqual(result, userContainerMock.users[1].UserName);
-            // Assert.AreEqual(getusernamebyemail.UserName, userContainerMock.users[1].UserName);
 
         }
 
@@ -154,24 +139,19 @@ namespace LibaryTest
             //Arrange
 
             UserContainerMock userContainerMock = new UserContainerMock();
-            //UserContainer userContainer = new(userContainerMock);
-            User user=new User(userContainerMock)
+            User user = new User(userContainerMock)
             {
                 Email = "Tim@gmail.com",
                 Password = "1234567890"
             };
 
 
-            // var userlist = userContainer.GetAllUsers();
-            //var checkuser = userlist[1];
-
-
             //Act
             var result = user.Checkinformation(user.Email, user.Password);
 
 
-           // Assert
-                Assert.IsTrue(result);
+            // Assert
+            Assert.IsTrue(result);
 
 
         }
@@ -182,4 +162,4 @@ namespace LibaryTest
 
     }
 
-    }
+}

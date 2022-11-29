@@ -51,11 +51,7 @@ namespace LibaryTest
             books.Remove(bookdto);
             books.Add(book);
             return true;
-            //if (book != null&&book.BookTitle== "Trying"&&book.Author== "Cuneytta")
-            //{
-            //    return true;
-            //}
-            //return false;   
+            
         }
 
         public BookDTO GetBook(int bookid)

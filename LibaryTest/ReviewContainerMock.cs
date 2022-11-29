@@ -36,11 +36,6 @@ namespace LibaryTest
         public bool AddReview(ReviewDTO reviewDTO)
         {
             reviews.Add(reviewDTO);
-            //if (reviewDTO.Review == "Iedereen moet lezen!!")
-            //{
-
-            //    return true;
-            //}
            return true;
         }
     }

@@ -19,9 +19,7 @@ namespace LibaryTest
             LoanContainerMock loancontainermock = new LoanContainerMock();
 
             LoanContainer loancontainer = new LoanContainer(loancontainermock);
-            //DateTime date = new DateTime(2022, 12, 3);
-            //DateTime date1 =new  DateTime(2022, 12, 7);
-            //
+           
             DateTime date1 = DateTime.Now.AddDays(5);
             DateTime date3 = DateTime.Now.AddDays(8);
 
@@ -73,66 +71,11 @@ namespace LibaryTest
 
         }
         [TestMethod]
-        public void CheckAvailibilityofBook()
+        public void BarrowdaysmallerthanToday()
         {
             //Arrange
             LoanContainerMock loancontainermock = new LoanContainerMock();
-
             LoanContainer loancontainer = new LoanContainer(loancontainermock);
-            //DateTime date3 =  new DateTime(2022, 11, 13);
-            //DateTime date4 = new DateTime(2022, 11, 15);
-            DateTime date3 = DateTime.Today.AddDays(1);
-            DateTime date4 = DateTime.Today.AddDays(-5);
-            Loan loan = new Loan()
-            {
-                LoanDate = date3,
-                LoanID = 3,
-                BookID = 2,
-                ReturnDate = date4,
-                UserID = 3,
-
-
-            };
-            DateTime date1 = new DateTime(2022, 11, 16);
-            DateTime date2 = new DateTime(2022, 11, 18);
-            Loan loan1 = new Loan()
-            {
-                LoanDate = date1,
-                ReturnDate = date2,
-                BookID = 2,
-                UserID = 4
-
-
-
-
-            };
-            DateTime date5 = DateTime.Today.AddDays(10);
-            DateTime date6 = DateTime.Today.AddDays(70);
-            //DateTime date5 = new DateTime(2023, 1, 15);
-            //DateTime date6 = new DateTime(2023, 2, 20);
-            Loan loan2 = new Loan()
-            {
-                LoanDate = date5,
-                ReturnDate = date6,
-                BookID = 2,
-                UserID = 3,
-
-            };
-
-            //DateTime date7 = new DateTime(2023, 4, 15);
-            //DateTime date8 = new DateTime(2023, 3, 20);
-            DateTime date7 = DateTime.Today.AddDays(30);
-            DateTime date8 = DateTime.Today.AddDays(5);
-            Loan loan3 = new Loan()
-            {
-                LoanDate = date7,
-                ReturnDate = date8,
-                BookID = 2,
-                UserID = 3,
-
-            };
-            //DateTime date9 = new DateTime(2022, 11, 5);
-            //DateTime date10 = new DateTime(2022, 11, 20);
             DateTime date9 = DateTime.Today.AddDays(-5);
             DateTime date10 = DateTime.Today.AddDays(5);
             Loan loan4 = new Loan()
@@ -145,25 +88,107 @@ namespace LibaryTest
             };
 
 
-
             //Act
-            var barraowdaysmallerthantoday = loancontainer.CheckAvailibilityofBook(loan);
-            var morethan3week = loancontainer.CheckAvailibilityofBook(loan2);
-            var barrowdaybiggerthanreturn = loancontainer.CheckAvailibilityofBook(loan3);
+           
             var barrowdaybiggerthantoday = loancontainer.CheckAvailibilityofBook(loan4);
 
 
             //Assert
-            Assert.IsFalse(barraowdaysmallerthantoday);
-            Assert.IsFalse(morethan3week);
-            Assert.IsFalse(barrowdaybiggerthanreturn);
+          
             Assert.IsFalse(barrowdaybiggerthantoday);
 
 
+        }
+        [TestMethod]
+        public void ReturndateSmallerthanBarrowday()
+        {
+            //Arrange
+            LoanContainerMock loancontainermock = new LoanContainerMock();
+
+            LoanContainer loancontainer = new LoanContainer(loancontainermock);
+            DateTime date3 = DateTime.Today.AddDays(1);
+            DateTime date4 = DateTime.Today.AddDays(-5);
+            Loan loan = new Loan()
+            {
+                LoanDate = date3,
+                LoanID = 3,
+                BookID = 2,
+                ReturnDate = date4,
+                UserID = 3,
+
+
+            };
+            //Act
+            var barraowdaysmallerthantoday = loancontainer.CheckAvailibilityofBook(loan);
+
+            //Assert
+            Assert.IsFalse(barraowdaysmallerthantoday);
+        }
+
+        [TestMethod]
+        public void BarrowMoreThan3week()
+        {
+            //Arrange
+            LoanContainerMock loancontainermock = new LoanContainerMock();
+
+            LoanContainer loancontainer = new LoanContainer(loancontainermock);
+            DateTime date5 = DateTime.Today.AddDays(10);
+            DateTime date6 = DateTime.Today.AddDays(70);
+            Loan loan2 = new Loan()
+            {
+                LoanDate = date5,
+                ReturnDate = date6,
+                BookID = 2,
+                UserID = 3,
+
+            };
+            //Act
+            var morethan3week = loancontainer.CheckAvailibilityofBook(loan2);
+
+            //Assert
+            Assert.IsFalse(morethan3week);
+        }
+        [TestMethod]
+        public void BarrowdayBiggerThanReturnDate()
+        {
+            //Arrange
+            LoanContainerMock loancontainermock = new LoanContainerMock();
+
+            LoanContainer loancontainer = new LoanContainer(loancontainermock);
+            DateTime date7 = DateTime.Today.AddDays(30);
+            DateTime date8 = DateTime.Today.AddDays(5);
+            Loan loan3 = new Loan()
+            {
+                LoanDate = date7,
+                ReturnDate = date8,
+                BookID = 2,
+                UserID = 3,
+
+            };
+            //Act
+            var barrowdaybiggerthanreturn = loancontainer.CheckAvailibilityofBook(loan3);
+
+            //Assert
+            Assert.IsFalse(barrowdaybiggerthanreturn);
+        }
+        [TestMethod]
+        public void GetLoansByUser()
+        {
+            //Arrange
+            LoanContainerMock loancontainermock = new LoanContainerMock();
+
+            LoanContainer loancontainer = new LoanContainer(loancontainermock);
+            int userid = 3;
+            //Act
+            var getloansbyuser = loancontainer.GetAllLoansByUser(userid);
+
+            //Assert
+            Assert.AreEqual(0, getloansbyuser.Count());
         }
 
 
 
 
     }
+    
 }

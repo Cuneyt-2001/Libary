@@ -62,6 +62,7 @@ namespace LibaryTest
 
         public void AddCategory()
         {
+            //Arrange
             CategoryContainerMock categoryContainerMock = new CategoryContainerMock();
 
             CategoryContainer categorycontainer = new CategoryContainer(categoryContainerMock);
@@ -137,21 +138,7 @@ namespace LibaryTest
         [TestMethod]
         public void GetAllCategoriesByID()
         {
-            //To do
-            ////Arrange
-
-            //CategoryContainerMock categorycontainermock = new CategoryContainerMock();
-            //CategoryContainer categorycontainer = new CategoryContainer(categorycontainermock);
-            //Category category = new Category
-            //{
-            //    CategoryID = 3,
-            //    CategoryName = "Try"
-            //};
-
-            ////Act
-            //categorycontainer.AddCategory(category);
-            ////Assert
-            //Assert.AreEqual(category.CategoryID, categorycontainermock.bookcategories[2].CategoryID);
+            
 
 
 

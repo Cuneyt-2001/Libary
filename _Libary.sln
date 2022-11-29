@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{3B515C6A-BC7F-4C80-8694-967E024FE6CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibaryTest", "LibaryTest\LibaryTest.csproj", "{48FD2956-598E-49AE-860D-5012782DAA04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibaryTest", "LibaryTest\LibaryTest.csproj", "{48FD2956-598E-49AE-860D-5012782DAA04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

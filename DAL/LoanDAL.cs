@@ -151,44 +151,78 @@ namespace DAL
             finally { Connection.connection.Close(); }
 
         }
-        public bool CheckAvailibilityofBook(LoanDTO loan)
+        public List<LoanDTO> CheckAvailibilityofBook(LoanDTO loandto)
         {
-
-            DateTime loandate = DateTime.MinValue;
-            DateTime returndate = DateTime.MinValue;
-            SqlCommand command2 = new SqlCommand("SELECT * FROM Loan WHERE LoanDate BETWEEN @selectedloandate AND @selectedreturndate OR ReturnDate BETWEEN @selectedloandate AND @selectedreturndate And BookID = @BookID", Connection.connection);
-            command2.Parameters.AddWithValue("@BookID", loan.BookID);
-            command2.Parameters.AddWithValue("@selectedloandate", loan.LoanDate);
-            command2.Parameters.AddWithValue("@selectedreturndate", loan.ReturnDate);
-            if (command2.Connection.State != ConnectionState.Open)
+            try
             {
-                command2.Connection.Open();
-            }
-            SqlDataReader reader = command2.ExecuteReader();
+                List<LoanDTO> loanlist = new List<LoanDTO>();
+                SqlCommand command2 = new SqlCommand("SELECT Count(*) FROM Loan WHERE LoanDate BETWEEN @selectedloandate AND @selectedreturndate OR ReturnDate BETWEEN @selectedloandate AND @selectedreturndate And BookID = @BookID", Connection.connection);
 
-            //ik hoef niet while te gebruiken als ik count doe
-            while (reader.Read())
-            {
-                returndate = Convert.ToDateTime(reader["ReturnDate"]);
-
-                loandate = Convert.ToDateTime(reader["LoanDate"]);
-
-
-                if (loan.LoanDate >= returndate || loan.ReturnDate < loandate)
+                command2.Parameters.AddWithValue("@BookID", loandto.BookID);
+                command2.Parameters.AddWithValue("@selectedloandate", loandto.LoanDate);
+                command2.Parameters.AddWithValue("@selectedreturndate", loandto.ReturnDate);
+                if (command2.Connection.State != ConnectionState.Open)
                 {
-                    return true;
+                    command2.Connection.Open();
                 }
 
+                Int32 count = Convert.ToInt32(command2.ExecuteScalar());
+                SqlDataReader reader = command2.ExecuteReader();
+                if (count > 0)
+                {
+                    
+                    while (reader.Read())
+                    {
+                        LoanDTO loandtos = new LoanDTO();
+                        loandtos.LoanDate = Convert.ToDateTime(reader["LoanDate"]);
+                        loandtos.ReturnDate = Convert.ToDateTime(reader["ReturnDate"]);
+
+                        loanlist.Add(loandtos);
+                    }
+                    reader.Close();
+
+                    return loanlist;
+                }
                 else
                 {
-                    return false;
+
+                    return new List<LoanDTO>();
                 }
+
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Connection.connection.Close();
+            }
+            // SqlDataReader reader = command2.ExecuteReader();
 
-            reader.Close();
-            Connection.connection.Close();
+            //ik hoef niet while te gebruiken als ik count doe
+            //while (reader.Read())
+            //{
+            //returndate = Convert.ToDateTime(reader["ReturnDate"]);
 
-            return true;
+            //loandate = Convert.ToDateTime(reader["LoanDate"]);
+
+
+            //if (loan.LoanDate >= returndate || loan.ReturnDate < loandate)
+            //{
+            //    return true;
+            //}
+
+            //else
+            //{
+            //    return false;
+            //}
+            //}
+
+            //  reader.Close();
+
+
+            //return true;
 
 
         }
