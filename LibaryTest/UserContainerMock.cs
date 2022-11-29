@@ -22,15 +22,8 @@ namespace LibaryTest
                 Password = "12345678",
                 Rol = true,
                 Surname = "Terkesli"
-                
-
-
-
-                
-
-             
-
             };
+
             UserDTO user2 = new UserDTO()
             {
                 UserID = 2,
@@ -41,6 +34,7 @@ namespace LibaryTest
                 Surname = "thone"
 
             };
+
             users.Add(user1);
             users.Add(user2);
 

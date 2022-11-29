@@ -26,17 +26,15 @@ namespace LibaryTest
             };
             //Act
 
-         var result  = reviewContainer.AddReview(review);
+            var result  = reviewContainer.AddReview(review);
           
             //Assert
 
             Assert.IsTrue(result);
             Assert.AreEqual(review.ReviewID,reviewContainerMock.reviews.Last().ReviewID);
-            Assert.AreEqual("Iedereen moet lezen!!", reviewContainerMock.reviews.Last().Review);   
+            Assert.AreEqual("Iedereen moet lezen!!", reviewContainerMock.reviews.Last().Review);
+            Assert.AreNotEqual("moet Lezen", reviewContainerMock.reviews.Last().Review);
         
-
-
-
         }
 
 

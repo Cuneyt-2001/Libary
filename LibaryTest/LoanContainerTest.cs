@@ -67,6 +67,14 @@ namespace LibaryTest
 
             //Assert
             Assert.AreEqual(loancontainermock.GetAllLoans().Count(), loans.Count); ;
+            for (int i = 0; i < loans.Count; i++)
+            {
+                Assert.AreEqual(loans[i].LoanDate, loancontainermock.Loans[i].LoanDate);
+                Assert.AreEqual(loans[i].ReturnDate,loancontainermock.Loans[i].ReturnDate);
+                Assert.AreEqual(loans[i].LoanID, loancontainermock.Loans[i].LoanID);    
+                Assert.AreEqual(loans[i].BookID,loancontainermock.Loans[i].BookID);
+
+            }
 
 
         }
@@ -172,7 +180,7 @@ namespace LibaryTest
             Assert.IsFalse(barrowdaybiggerthanreturn);
         }
         [TestMethod]
-        public void GetLoansByUser()
+        public void GetLoansByUserNone()
         {
             //Arrange
             LoanContainerMock loancontainermock = new LoanContainerMock();
@@ -184,6 +192,20 @@ namespace LibaryTest
 
             //Assert
             Assert.AreEqual(0, getloansbyuser.Count());
+        }
+        [TestMethod]
+        public void GetLoansByUser()
+        {
+            //Arrange
+            LoanContainerMock loancontainermock = new LoanContainerMock();
+
+            LoanContainer loancontainer = new LoanContainer(loancontainermock);
+            int userid = 2;
+            //Act
+            var getloansbyuser = loancontainer.GetAllLoansByUser(userid);
+
+            //Assert
+            Assert.AreEqual(1, getloansbyuser.Count());
         }
 
 

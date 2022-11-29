@@ -50,8 +50,6 @@ namespace _Libary.Controllers
                 bookViewModel.Add(new BookViewModel(b, categories));
             }
 
-           
-
             ViewBag.Success = TempData["Success"];
             ViewBag.Message = TempData["Message"];
             TempData.Remove("Success");

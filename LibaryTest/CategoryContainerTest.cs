@@ -22,23 +22,26 @@ namespace LibaryTest
             BookCategory category = new BookCategory()
             {
                 ID = 3,
-                CategoryID = 1,    
+                CategoryID = 1,
                 BookID = 4,
-               
+
 
             };
 
             //Act
 
-            categoryContainer.AddBookCategory(category.CategoryID,category.BookID);
-            var result = categorycontainermock.bookcategories[2];
+          var result=  categoryContainer.AddBookCategory(category.CategoryID, category.BookID);
+         
 
             //Assert
 
-            Assert.AreEqual(3,categorycontainermock.bookcategories.Count());
-            Assert.AreEqual(category.BookID,categorycontainermock.bookcategories[2].BookID);
-            Assert.AreEqual(category.CategoryID,categorycontainermock.bookcategories[2].CategoryID);
+            Assert.AreEqual(3, categorycontainermock.bookcategories.Count());
+            Assert.AreEqual(category.BookID, categorycontainermock.bookcategories.Last().BookID);
+            Assert.AreEqual(category.CategoryID, categorycontainermock.bookcategories.Last().CategoryID);
+            Assert.IsTrue(result);
+           
         }
+
         [TestMethod]
         public void DeleteBookCategory()
         {
@@ -46,12 +49,14 @@ namespace LibaryTest
             int categoryid = 2;
             CategoryContainerMock categorycontainermock = new CategoryContainerMock();
             CategoryContainer categorycontainer = new CategoryContainer(categorycontainermock);
-            
+
             //Act
-            categorycontainer.DeleteBookCategory( categoryid);
-            var result = categorycontainermock.categories.Count;    
+          var deletedcategory=  categorycontainer.DeleteBookCategory(categoryid);
+            var result = categorycontainermock.categories.Count;
             //Assert
             Assert.AreEqual(1, result);
+            Assert.IsFalse(!deletedcategory);
+       
 
 
 
@@ -70,21 +75,22 @@ namespace LibaryTest
             Category category = new Category()
             {
                 CategoryID = 3,
-                CategoryName ="try"
+                CategoryName = "try"
             };
 
 
             //Act
 
-            categorycontainer.AddCategory(category);
+           var addedcategory= categorycontainer.AddCategory(category);
             var result = categoryContainerMock.categories.Count;
 
             //Assert
             Assert.AreEqual(3, result);
             Assert.AreEqual(category.CategoryName, categoryContainerMock.categories[2].CategoryName);
-
+            Assert.IsTrue(addedcategory);
 
         }
+
         [TestMethod]
         public void GetBookCategoriesByBookId()
         {
@@ -97,9 +103,9 @@ namespace LibaryTest
             var categorieslist = categorycontainer.GetBookCategoriesByBookId(4);
             var getbook = categorieslist[0];
             //Assert
+        
             Assert.AreEqual(getbook.CategoryID, categorycontainermock.bookcategories[0].CategoryID);
-
-
+            Assert.AreEqual(getbook.ID, categorycontainermock.bookcategories[0].ID);
 
         }
 
@@ -117,30 +123,22 @@ namespace LibaryTest
                 ID = 3,
                 BookID = 4,
                 CategoryID = 2,
-               
+
             };
-            
+
             //Act
-
-          categorycontainer.UpdateBookCategory (bookCategory);
-
+           categorycontainer.UpdateBookCategory(bookCategory);
 
             //Assert
-            Assert.AreEqual(bookCategory.BookID, categorycontainermock.bookcategories[2].BookID);
-            Assert.AreEqual(bookCategory.CategoryID, categorycontainermock.bookcategories[2].CategoryID);
-
-
-
-
-
+            Assert.AreEqual(bookCategory.BookID, categorycontainermock.bookcategories.Last().BookID);
+            Assert.AreEqual(bookCategory.CategoryID, categorycontainermock.bookcategories.Last().CategoryID);
+          
         }
 
         [TestMethod]
         public void GetAllCategoriesByID()
         {
-            
-
-
+            throw new NotImplementedException();
 
         }
     }

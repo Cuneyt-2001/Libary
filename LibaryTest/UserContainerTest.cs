@@ -66,6 +66,14 @@ namespace LibaryTest
 
             //Assert
             Assert.AreEqual(userContainerMock.users.Count, users.Count); ;
+            for (int i = 0; i < users.Count; i++)
+            {
+                Assert.AreEqual(users[i].UserID, userContainerMock.users[i].UserID);  
+                Assert.AreEqual(users[i].UserName, userContainerMock.users[i].UserName);
+                Assert.AreEqual(users[i].Email, userContainerMock.users[i].Email);
+                Assert.AreEqual(users[i].Rol, userContainerMock.users[i].Rol);
+
+            }
 
 
 
@@ -84,12 +92,15 @@ namespace LibaryTest
 
             //Act
             var result = userContainer.GetUserType("Tim@gmail.com");
+            var result2 = userContainer.GetUserType("cuneyt@gmail.com");
 
 
 
 
             //Assert
             Assert.AreEqual(result, userContainerMock.users[1].Rol);
+            Assert.IsFalse(result);
+            Assert.IsTrue(result2);
         }
 
         [TestMethod]
@@ -104,12 +115,13 @@ namespace LibaryTest
 
             //Act
             var result = userContainer.GetUserIdByEmail("Tim@gmail.com");
-
+            var result2 = userContainer.GetUserIdByEmail("cuneyt@gmail.com");
 
 
 
             //Assert
             Assert.AreEqual(result, userContainerMock.users[1].UserID);
+            Assert.AreEqual(result2, userContainerMock.users[0].UserID); 
         }
 
 
@@ -126,10 +138,12 @@ namespace LibaryTest
 
             //Act
             var result = userContainer.GetUserNameByEmail("Tim@gmail.com");
+            var result2=userContainer.GetUserNameByEmail("cuneyt@gmail.com");
 
 
             //Assert
             Assert.AreEqual(result, userContainerMock.users[1].UserName);
+            Assert.AreNotEqual(result2, userContainerMock.users[1].UserName);  
 
         }
 
@@ -152,6 +166,8 @@ namespace LibaryTest
 
             // Assert
             Assert.IsTrue(result);
+            Assert.AreEqual(user.Email, userContainerMock.users[1].Email);
+            Assert.AreEqual(user.Password, userContainerMock.users[1].Password);    
 
 
         }
