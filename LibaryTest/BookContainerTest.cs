@@ -136,7 +136,7 @@ namespace LibaryTest
             var booktitel = bookContainer.SearchBook(searchbook.BookTitle);
             //Assert
             Assert.AreEqual(1, booktitel.Count);
-            Assert.AreEqual(searchbook.BookID, bookContainerMock.books[1].BookTitle);
+            Assert.AreEqual(searchbook.BookID, bookContainerMock.books[1].BookID);
             Assert.AreEqual(searchbook.ISBN, bookContainerMock.books[1].ISBN);
             Assert.AreEqual(searchbook.Author, bookContainerMock.books[1].Author);
             Assert.AreEqual(searchbook.Publisher, bookContainerMock.books[1].Publisher);    

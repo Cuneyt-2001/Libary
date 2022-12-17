@@ -56,8 +56,6 @@ namespace LibaryTest
             LoanDTO loanDTO = Loans.Find(x => x.BookID == loan.BookID);
             var result = loanDTO.ReturnDate < loan.LoanDate;
             return result;
-
-
         }
 
         public List<LoanDTO> GetAllLoans()

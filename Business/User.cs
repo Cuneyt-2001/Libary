@@ -40,7 +40,6 @@ namespace Business
 
         }
         
-
         public bool Checkinformation(string email,string password)
         {
 

@@ -28,18 +28,18 @@ namespace LibaryTest
 
             };
 
-            //Act
+           // Act
 
-          var result=  categoryContainer.AddBookCategory(category.CategoryID, category.BookID);
-         
+          var result = categoryContainer.AddBookCategory(category.CategoryID, category.BookID);
 
-            //Assert
+
+           // Assert
 
             Assert.AreEqual(3, categorycontainermock.bookcategories.Count());
             Assert.AreEqual(category.BookID, categorycontainermock.bookcategories.Last().BookID);
             Assert.AreEqual(category.CategoryID, categorycontainermock.bookcategories.Last().CategoryID);
             Assert.IsTrue(result);
-           
+
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace LibaryTest
             CategoryContainer categorycontainer = new CategoryContainer(categorycontainermock);
 
             //Act
-          var deletedcategory=  categorycontainer.DeleteBookCategory(categoryid);
+          var deletedcategory=  categorycontainer.RemovecategoriesbyBookId(categoryid);
             var result = categorycontainermock.categories.Count;
             //Assert
             Assert.AreEqual(1, result);
@@ -103,36 +103,10 @@ namespace LibaryTest
             var categorieslist = categorycontainer.GetBookCategoriesByBookId(4);
             var getbook = categorieslist[0];
             //Assert
-        
+
             Assert.AreEqual(getbook.CategoryID, categorycontainermock.bookcategories[0].CategoryID);
-            Assert.AreEqual(getbook.ID, categorycontainermock.bookcategories[0].ID);
-
-        }
-
-        [TestMethod]
-        public void UpdateBookCategory()
-        {
-            //Arrange
-
-            CategoryContainerMock categorycontainermock = new CategoryContainerMock();
-            CategoryContainer categorycontainer = new CategoryContainer(categorycontainermock);
 
 
-            BookCategory bookCategory = new BookCategory()
-            {
-                ID = 3,
-                BookID = 4,
-                CategoryID = 2,
-
-            };
-
-            //Act
-           categorycontainer.UpdateBookCategory(bookCategory);
-
-            //Assert
-            Assert.AreEqual(bookCategory.BookID, categorycontainermock.bookcategories.Last().BookID);
-            Assert.AreEqual(bookCategory.CategoryID, categorycontainermock.bookcategories.Last().CategoryID);
-          
         }
 
         [TestMethod]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibaryTest
 {
-    public class CategoryContainerMock : ICategoryContainerDAL, ICategoryDAL
+    public class CategoryContainerMock : ICategoryContainerDAL
     {
         public List<CategoryDTO> categories = new List<CategoryDTO>();
         public List<BookCategoryDTO> bookcategories = new List<BookCategoryDTO>();
@@ -38,11 +38,11 @@ namespace LibaryTest
             };
             BookCategoryDTO bookcategorydto2 = new BookCategoryDTO()
             {
-                ID= 2,  
+                ID = 2,
                 CategoryID = 3,
                 BookID = 4,
             };
-            bookcategories.Add(bookcategorydto2);   
+            bookcategories.Add(bookcategorydto2);
             bookcategories.Add(bookcategorydto);
         }
 
@@ -50,13 +50,13 @@ namespace LibaryTest
         /* completed!  */
         public bool AddBookCategory(int CategoryID, int BookID)
         {
-          
+
             BookCategoryDTO bookcategory = new BookCategoryDTO
             {
                 CategoryID = CategoryID,
                 BookID = BookID
             };
-           bookcategories.Add(bookcategory);
+            bookcategories.Add(bookcategory);
             return true;
         }
         /* completed ! */
@@ -66,14 +66,6 @@ namespace LibaryTest
             return true;
                 
                   
-        }
-
-        /* completed ! */
-        public bool DeleteBookCategory(int id)
-        {
-            CategoryDTO CategoryToDelete = categories.Find(x => x.CategoryID == id);
-            categories.Remove(CategoryToDelete);
-            return true;
         }
         /* check  */
         public List<CategoryDTO> GetAllCategoriesByIds(List<int> ids)
@@ -87,16 +79,22 @@ namespace LibaryTest
             List<BookCategoryDTO> getcategoriesbybookid = bookcategories.FindAll(x => x.BookID == bookid);
             return getcategoriesbybookid;
 
-           
-        }
-        /* completed ! */
-        public int UpdateBookCategory(BookCategoryDTO bookCategoryDTO)
-        {
-            BookCategoryDTO bookcategorydto = bookcategories.First(x => x.BookID == bookCategoryDTO.BookID);
-            bookcategories.Add(bookCategoryDTO);
-            return bookcategories.Count();  
+
         }
 
-      
+        public bool RemoveCategoriesForBookID(int bookid)
+        {
+            CategoryDTO CategoryToDelete = categories.Find(x => x.CategoryID == bookid);
+            categories.Remove(CategoryToDelete);
+            return true;
+        }
+
+        List<CategoryDTO> ICategoryContainerDAL.GetBookCategoriesByBookId(int bookid)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
     }
 }

@@ -162,16 +162,10 @@ namespace _Libary.Controllers
             try
             {
                 Book book = _book.GetBook(id);
-                BookViewModel model = new BookViewModel(book);
+                
                 var bookCategories = _category.GetBookCategoriesByBookId(id);
-                var catIds = bookCategories.Select(c => c.CategoryID).ToList();
-                var categories = new List<Category>();
+                BookViewModel model = new BookViewModel(book, bookCategories);
                 ViewBag.Categories = _book.GetCategories();
-                if (bookCategories != null)
-                {
-                    categories = _category.GetAllCategoriesByIds(catIds).Select(a => new Category { CategoryID = a.CategoryID, CategoryName = a.CategoryName }).ToList();
-                }
-                model.Categories = categories;
                 return View(model);
             }
             catch (Exception ex)
@@ -196,23 +190,7 @@ namespace _Libary.Controllers
 
             var bookid = book.EditBook(book);
 
-            var bookCategories = _category.GetBookCategoriesByBookId(book.BookID);
-            if (bookCategories != null)
-            {
-                foreach (var item in bookCategories)
-                {
-                    try
-                    {
-                        _category.DeleteBookCategory(item.ID);
-                    }
-                    catch
-                    {
-                        ViewBag.Success = false;
-                        ViewBag.Message = "The book could not be updated";
-                        return View();
-                    }
-                }
-            }
+            _category.RemovecategoriesbyBookId(book.BookID);
 
             foreach (var item in categoryIds)
             {

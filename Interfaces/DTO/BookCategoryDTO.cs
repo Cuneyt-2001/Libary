@@ -13,6 +13,5 @@ namespace Interfaces.DTO
         public int BookID { get; set; }
         public int CategoryID { get; set; }
 
-
     }
 }

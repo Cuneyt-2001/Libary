@@ -62,13 +62,36 @@ namespace DAL
             }
 
         }
-        public List<BookCategoryDTO> GetBookCategoriesByBookId(int bookid)
+
+        public bool RemoveCategoriesForBookID(int bookid)
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand($"Delete from [Book_Category] where BookID={bookid}", Connection.connection);
+                
+                if (command.Connection.State != ConnectionState.Open)
+                {
+                    command.Connection.Open();
+
+                }
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch(Exception exception)
+            {
+
+            }
+            finally { Connection.connection.Close(); } 
+            return false;
+        }
+
+        public List<CategoryDTO> GetBookCategoriesByBookId(int bookid)
         {
 
             try
             {
-                List<BookCategoryDTO> bookCategories = new List<BookCategoryDTO>();
-                SqlCommand command = new SqlCommand($"Select * from [Book_Category] where BookID={bookid}", Connection.connection);
+                List<CategoryDTO> bookCategories = new List<CategoryDTO>();
+                SqlCommand command = new SqlCommand($"Select Category.* from [Book_Category] INNER JOIN [Category] ON Book_Category.CategoryID=Category.CategoryID where BookID={bookid}", Connection.connection);
                 if (command.Connection.State != ConnectionState.Open)
                 {
                     command.Connection.Open();
@@ -78,10 +101,10 @@ namespace DAL
                 while (reader.Read())
                 {
 
-                    BookCategoryDTO dto = new BookCategoryDTO();
-                    dto.BookID = Convert.ToInt32(reader["BookID"]);
+                    CategoryDTO dto = new CategoryDTO();
+                    //dto.BookID = Convert.ToInt32(reader["BookID"]);
                     dto.CategoryID = Convert.ToInt32(reader["CategoryID"]);
-                    dto.ID = Convert.ToInt32(reader["ID"]);
+                    dto.CategoryName = Convert.ToString(reader["CategoryName"]);
                     bookCategories.Add(dto);
                 }
                 reader.Close();
@@ -159,31 +182,7 @@ namespace DAL
 
 
         }
-        public int UpdateBookCategory(BookCategoryDTO bookCategoryDTO)
-        {
-            try
-            {
-                var command = "update [Book_Category] set CategoryID=@CategoryID Where BookID=@BookID";
-                var com = new SqlCommand(command, Connection.connection);
-                com.Parameters.AddWithValue("@CategoryID", bookCategoryDTO.CategoryID);
-                com.Parameters.AddWithValue("@BookID", bookCategoryDTO.BookID);
-
-                if (com.Connection.State != ConnectionState.Open)
-                {
-                    com.Connection.Open();
-
-                }
-                return com.ExecuteNonQuery();
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-            finally { Connection.connection.Close(); }
-
-
-
-        }
+    
 
         public bool DeleteBookCategory(int id)
         {

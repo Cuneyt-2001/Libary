@@ -110,6 +110,7 @@ namespace LibaryTest
         [TestMethod]
         public void ReturndateSmallerthanBarrowday()
         {
+            //to do future
             //Arrange
             LoanContainerMock loancontainermock = new LoanContainerMock();
 
@@ -135,7 +136,7 @@ namespace LibaryTest
 
         [TestMethod]
         public void BarrowMoreThan3week()
-        {
+        {//precies na geldige datum
             //Arrange
             LoanContainerMock loancontainermock = new LoanContainerMock();
 
@@ -196,6 +197,7 @@ namespace LibaryTest
         [TestMethod]
         public void GetLoansByUser()
         {
+            //inhoud test
             //Arrange
             LoanContainerMock loancontainermock = new LoanContainerMock();
 
@@ -206,6 +208,7 @@ namespace LibaryTest
 
             //Assert
             Assert.AreEqual(1, getloansbyuser.Count());
+          
         }
 
 

@@ -29,35 +29,25 @@ namespace Business
             return _ICategoryContainerDAL.AddBookCategory(CategoryID, BookID);  
 
         }
-        public List<BookCategoryDTO> GetBookCategoriesByBookId(int id)
+        public List<Category> GetBookCategoriesByBookId(int id)
         {
+            List<Category> categoryList = new List<Category>();
+            _ICategoryContainerDAL.GetBookCategoriesByBookId(id).ForEach(categoryDTO => categoryList.Add(new Category(categoryDTO)));
 
-            return _ICategoryContainerDAL.GetBookCategoriesByBookId(id);
-
-
+            return categoryList;
 
         }
         public List<CategoryDTO> GetAllCategoriesByIds(List<int> ids)
         {
 
-
             return _ICategoryContainerDAL.GetAllCategoriesByIds(ids);
         }
-        public int UpdateBookCategory(BookCategory bookCategory)
+        public bool RemovecategoriesbyBookId(int id)
         {
-            BookCategoryDTO bookCategoryDTO = new();
-            bookCategoryDTO.CategoryID=bookCategory.CategoryID;
-            bookCategoryDTO.BookID=bookCategory.BookID;
-            return _ICategoryContainerDAL.UpdateBookCategory(bookCategoryDTO);
 
-
-
+            return _ICategoryContainerDAL.RemoveCategoriesForBookID(id);
         }
-        public bool DeleteBookCategory(int id)
-        {
-            return _ICategoryContainerDAL.DeleteBookCategory(id);
 
-        }
 
     }
 }

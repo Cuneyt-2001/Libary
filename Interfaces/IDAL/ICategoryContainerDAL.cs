@@ -11,10 +11,10 @@ namespace Interfaces.IDAL
     {
         bool AddCategory(CategoryDTO categoryDTO);
         bool AddBookCategory(int CategoryID, int BookID);
-        public List<BookCategoryDTO> GetBookCategoriesByBookId( int bookid);
+        public List<CategoryDTO> GetBookCategoriesByBookId( int bookid);
         public List<CategoryDTO> GetAllCategoriesByIds(List<int> ids);
-        public int UpdateBookCategory(BookCategoryDTO bookCategoryDTO);
-        public bool DeleteBookCategory(int id);
+        //public bool DeleteBookCategory(int id);
+        public bool RemoveCategoriesForBookID(int bookid);
 
     }
 }

@@ -24,7 +24,7 @@ namespace _Libary.Models
         public string Author { get; set; }
        
 
-        public List<Category> Categories { get; set; }
+        public List<CategoryViewModel> Categories { get; set; }
 
         public BookViewModel(Book book)
         {
@@ -42,7 +42,11 @@ namespace _Libary.Models
             this.BookTitle = book.BookTitle;
             this.Publisher = book.Publisher;
             this.Author = book.Author;
-            this.Categories = categories;
+            this.Categories = new List<CategoryViewModel>();
+            foreach (var category in categories)
+            {
+                this.Categories.Add(new CategoryViewModel(category));
+            }
         }
 
 

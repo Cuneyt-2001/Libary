@@ -42,21 +42,12 @@ namespace Business
 
                 return false;
             }
-            //in plaats van deze
-            var count = _loanContainerDAL.CheckAvailibilityofBook(loanDTO);
-            foreach(var c in count)
+          
+            var allLoans = _loanContainerDAL.GetAllLoans();
+            if (allLoans.Any(a => a.BookID == loan.BookID && ((loan.LoanDate >= a.LoanDate && loan.LoanDate <= a.ReturnDate) || (loan.ReturnDate >= a.LoanDate && loan.ReturnDate <= a.ReturnDate))))
             {
-                if (( loan.LoanDate >= c.LoanDate && loan.LoanDate <= c.ReturnDate) || (loan.ReturnDate >= c.LoanDate && loan.ReturnDate <= c.ReturnDate))
-                {
-                    return false;
-                }
+                return false;
             }
-            //daaronder
-            //var allLoans = _loanContainerDAL.GetAllLoans();
-            //if (allLoans.Any(a => a.BookID == loan.BookID && ((loan.LoanDate >= a.LoanDate && loan.LoanDate <= a.ReturnDate) || (loan.ReturnDate >= a.LoanDate && loan.ReturnDate <= a.ReturnDate))))
-            //{
-            //    return false;
-            //}
             return true;
         }
 

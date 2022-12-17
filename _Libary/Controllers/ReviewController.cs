@@ -36,7 +36,7 @@ namespace _Libary.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddReview(ReviewViewModel model/*,int id*/)
+        public IActionResult AddReview(ReviewViewModel model)
         {
 
             try
