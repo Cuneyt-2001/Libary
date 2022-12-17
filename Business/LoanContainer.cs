@@ -54,7 +54,7 @@ namespace Business
         public List<Loan> GetAllLoans()
         {
 
-            List<LoanDTO> loandtos = _loanContainerDAL.GetAllLoans();
+            List<LoanDTO> loandtos = _loanContainerDAL.GetAllLoans().Where(x=>x.ReturnDate>= DateTime.Now.Date).ToList();
             List<Loan> loanlist = new List<Loan>();
             foreach (LoanDTO loandto in loandtos)
             {

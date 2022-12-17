@@ -198,31 +198,6 @@ namespace DAL
             {
                 Connection.connection.Close();
             }
-            // SqlDataReader reader = command2.ExecuteReader();
-
-            //ik hoef niet while te gebruiken als ik count doe
-            //while (reader.Read())
-            //{
-            //returndate = Convert.ToDateTime(reader["ReturnDate"]);
-
-            //loandate = Convert.ToDateTime(reader["LoanDate"]);
-
-
-            //if (loan.LoanDate >= returndate || loan.ReturnDate < loandate)
-            //{
-            //    return true;
-            //}
-
-            //else
-            //{
-            //    return false;
-            //}
-            //}
-
-            //  reader.Close();
-
-
-            //return true;
 
 
         }

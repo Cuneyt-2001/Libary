@@ -15,6 +15,7 @@ namespace Interfaces.IDAL
         public List<CategoryDTO> GetAllCategoriesByIds(List<int> ids);
         //public bool DeleteBookCategory(int id);
         public bool RemoveCategoriesForBookID(int bookid);
+        public bool PreventDoublecategory(string categoryname);
 
     }
 }

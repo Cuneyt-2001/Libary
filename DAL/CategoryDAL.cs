@@ -209,5 +209,21 @@ namespace DAL
 
 
         }
+        public bool PreventDoublecategory(string categoryname)
+        {
+
+            var result = $"select count(*) from Category where CategoryName = @CategoryName";
+            var com = new SqlCommand(result, Connection.connection);
+            if (com.Connection.State != ConnectionState.Open)
+            {
+                com.Connection.Open();
+
+            }
+           if(result.Contains(categoryname))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

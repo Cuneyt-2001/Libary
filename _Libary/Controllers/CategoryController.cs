@@ -37,10 +37,19 @@ namespace _Libary.Controllers
                 Category category = new Category();
                 category.CategoryID = model.CategoryID;
                 category.CategoryName = model.CategoryName;
-                categoryContainer.AddCategory(category);
-                ViewBag.Message = "Category added.";
-             
-                ViewBag.Success = true;
+                var issamerecord = categoryContainer.PreventDoublecategory(model.CategoryName);
+                if (issamerecord == false)
+                {
+                    categoryContainer.AddCategory(category);
+                    ViewBag.Message = "Category added.";
+
+                    ViewBag.Success = true;
+                }
+                else
+                {
+                    ViewBag.Message = "Category is already exist";
+                    ViewBag.Success=false;
+                }
 
 
                 return View(); 

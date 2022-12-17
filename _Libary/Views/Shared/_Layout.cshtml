@@ -53,7 +53,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Loan" asp-action="UserLoan">My Loans</a>
                         </li>
                          }
-                     
+                         @if(role=="True")
+                        {
+                              <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="AddCategory">Add Category</a>
+                        </li>
+                        }
+
 
 
 

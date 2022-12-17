@@ -48,6 +48,12 @@ namespace Business
             return _ICategoryContainerDAL.RemoveCategoriesForBookID(id);
         }
 
+        public bool PreventDoublecategory(string categoryname)
+        {
+
+           return _ICategoryContainerDAL.PreventDoublecategory(categoryname);
+        }
+
 
     }
 }
