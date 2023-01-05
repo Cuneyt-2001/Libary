@@ -28,35 +28,38 @@ namespace _Libary.Controllers
         [HttpPost]
         public IActionResult Login(UserViewModel usermodel)
         {
-                    User user = new User(new UserDAL());
-                    var result = user.Checkinformation(usermodel.Email, usermodel.Password);
-                    var username = _userContainer.GetUserNameByEmail(usermodel.Email);
-                    var role = _userContainer.GetUserType(usermodel.Email);
-                    var userId = _userContainer.GetUserIdByEmail(usermodel.Email);
+            User user = new User(new UserDAL());
+            var result = user.Checkinformation(usermodel.Email, usermodel.Password);
+            var username = _userContainer.GetUserNameByEmail(usermodel.Email);
+            var role = _userContainer.GetUserType(usermodel.Email);
+            var userId = _userContainer.GetUserIdByEmail(usermodel.Email);
 
 
 
-                    if (result == true)
+            if (result == true)
 
-                    {
+            {
 
-                        TempData["Success"] = true;
-                        TempData["Message"] = "Login Succeeded";
+                TempData["Success"] = true;
+                TempData["Message"] = "Login Succeeded";
 
-                        HttpContext.Session.SetString("UserName", username);
-                        HttpContext.Session.SetString("UserId", userId.ToString());
+                HttpContext.Session.SetString("UserName", username);
+                HttpContext.Session.SetString("UserId", userId.ToString());
 
-                        HttpContext.Session.SetString("Role", role.ToString());
+                HttpContext.Session.SetString("Role", role.ToString());
 
-                        return RedirectToAction("index", "Home");
-                    }
-                    else
-                    {
-                        return View();
-                    }
-                
+                return RedirectToAction("index", "Home");
+            }
+            else
+            {
+                ViewBag.Success = false;
+                ViewBag.Message = "Please check your user credentials";
+                return View();
 
-           
+            }
+
+
+
         }
 
 

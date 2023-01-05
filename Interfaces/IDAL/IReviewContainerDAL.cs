@@ -9,6 +9,11 @@ namespace Interfaces.IDAL
 {
     public interface IReviewContainerDAL
     {
+        /// <summary>
+        /// Via deze methode kan de gebruiker een review toevoegen.
+        /// </summary>
+        /// <param name="reviewDTO"></param>
+        /// <returns></returns>
         bool AddReview(ReviewDTO reviewDTO);
     }
 }

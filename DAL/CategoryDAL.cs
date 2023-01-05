@@ -120,9 +120,6 @@ namespace DAL
                 Connection.connection.Close();
             }
 
-
-
-
         }
        
 

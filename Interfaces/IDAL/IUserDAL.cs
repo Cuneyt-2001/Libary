@@ -8,7 +8,13 @@ namespace Interfaces.IDAL
 {
     public interface IUserDAL
     {
+        /// <summary>
+        /// dit controleert de gebruiker gegevens op basis van email en wachtwoord
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         bool Check_User_Information(string email, string password);
-      //  bool AddReview(ReviewDTO reviw);
+     
     }
 }

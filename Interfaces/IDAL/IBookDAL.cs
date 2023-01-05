@@ -9,7 +9,12 @@ namespace Interfaces.IDAL
 {
     public interface IBookDAL
     {
+        /// <summary>
+        /// Via deze methode kan de gebruiker boekgegevens updaten.
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
         bool EditBook(BookDTO book);
-        // Review list dtos BookDTO GetReview(int bookid);
+        
     }
 }
