@@ -67,7 +67,7 @@ namespace _Libary.Controllers
 
             }
 
-            ViewBag.Categories = _book.GetCategories();
+            ViewBag.Categories = _category.GetCategories();
             return View();
         }
 
@@ -165,7 +165,7 @@ namespace _Libary.Controllers
                 
                 var bookCategories = _category.GetBookCategoriesByBookId(id);
                 BookViewModel model = new BookViewModel(book, bookCategories);
-                ViewBag.Categories = _book.GetCategories();
+                ViewBag.Categories = _category.GetCategories();
                 return View(model);
             }
             catch (Exception ex)

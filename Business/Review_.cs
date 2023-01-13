@@ -18,6 +18,12 @@ namespace Business
         {
         }
 
-        
+        public Review_(ReviewDTO reviewDTO)
+        {
+            this.ReviewID = reviewDTO.ReviewID;
+            this.UserID = reviewDTO.UserID;
+            this.BookID = reviewDTO.BookID;
+            this.Review = reviewDTO.Review;
+        }
     }
 }

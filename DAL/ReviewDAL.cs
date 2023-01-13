@@ -20,11 +20,11 @@ namespace DAL
                 if (command.Connection.State != ConnectionState.Open)
                 {
                     command.Connection.Open();
-                   
+
                     command.Parameters.AddWithValue("@BookID", reviewDTO.BookID);
                     command.Parameters.AddWithValue("@UserID", reviewDTO.UserID);
                     command.Parameters.AddWithValue("@Review", reviewDTO.Review);
-                    
+
                 }
                 return command.ExecuteNonQuery() > 0;
             }
@@ -36,6 +36,43 @@ namespace DAL
             {
                 Connection.connection.Close();
             }
+
+        }
+        public List<ReviewDTO> GetReview(int id)
+        {
+            try
+            {
+                Connection.connection.Open();
+                List<ReviewDTO> reviewlist = new List<ReviewDTO>();
+
+                SqlCommand comand = new SqlCommand("select * from [Review] where BookID='" + id + "'", Connection.connection);
+                if (comand.Connection.State != ConnectionState.Open)
+                {
+                    comand.Connection.Open();
+                }
+
+                SqlDataReader reader = comand.ExecuteReader();
+                while (reader.Read())
+                {
+                    ReviewDTO reviewDTO = new ReviewDTO();
+                    reviewDTO.BookID = Convert.ToInt32(reader["BookID"]);
+                    reviewDTO.Review = Convert.ToString(reader["Review"]);
+                    reviewlist.Add(reviewDTO);
+
+                }
+                reader.Close();
+
+                return reviewlist;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+
+            { Connection.connection.Close(); }
+
 
         }
 

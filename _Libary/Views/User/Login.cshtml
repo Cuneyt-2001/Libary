@@ -25,18 +25,14 @@
             <label>Email</label>
             <br/>
             <input type="text" required class="form-control" asp-for="Email"/>
-          
-         @*   <input type="text" class="form-control" id="Email" name="Email"/>*@
-             @* <input type="hidden" asp-for="BookID" />*@
        </div>
        <div class="form-group">
 
             <label>Password</label>
               <input type="password" required  class="form-control" asp-for="Password"/>
-           @* <input type="password" class="form-control" id="password" name="password"/>*@
+          
        </div>
          <div class="form-group">
-
             <label></label>
             <input type="submit" class="btn btn-primary" value="Login"/>
              <a asp-action="CreateUser" asp-controller="User" class="btn btn-secondary">Sign Up</a>

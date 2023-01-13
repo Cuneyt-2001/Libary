@@ -13,9 +13,10 @@ namespace _Libary.Models
             this.CategoryName = category.CategoryName;
 
         }
-
         public CategoryViewModel()
         {
+
         }
+
     }
 }

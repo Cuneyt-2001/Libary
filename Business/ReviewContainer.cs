@@ -17,14 +17,21 @@ namespace Business
             _IReviewContainerDAL = iReviewContainerDAL;
         }
         public bool AddReview(Review_ review)
-            
+
         {
             ReviewDTO reviewDTO = new ReviewDTO();
             reviewDTO.UserID = review.UserID;
             reviewDTO.BookID = review.BookID;
             reviewDTO.Review = review.Review;
-            reviewDTO.ReviewID = review.ReviewID;   
+            reviewDTO.ReviewID = review.ReviewID;
             return _IReviewContainerDAL.AddReview(reviewDTO);
+        }
+        public List<Review_> GetReview(int id)
+        {
+            List<Review_> reviewlist = new List<Review_>();
+            _IReviewContainerDAL.GetReview(id).ForEach(reviewdto => reviewlist.Add(new Review_(reviewdto)));
+            return reviewlist;
+
         }
     }
 }

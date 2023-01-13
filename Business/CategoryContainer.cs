@@ -37,10 +37,13 @@ namespace Business
             return categoryList;
 
         }
-        public List<CategoryDTO> GetAllCategoriesByIds(List<int> ids)
+        public List<Category> GetAllCategoriesByIds(List<int> ids)
         {
+            List<Category> categoryList = new List<Category>();
+            _ICategoryContainerDAL.GetAllCategoriesByIds(ids).ForEach(categoryDTO => categoryList.Add(new Category(categoryDTO)));
+            return categoryList;
 
-            return _ICategoryContainerDAL.GetAllCategoriesByIds(ids);
+           
         }
         public bool RemovecategoriesbyBookId(int id)
         {
@@ -52,6 +55,18 @@ namespace Business
         {
 
            return _ICategoryContainerDAL.PreventDoublecategory(categoryname);
+        }
+        public List<Category> GetCategories()
+        {
+            List<CategoryDTO> categorydtos = _ICategoryContainerDAL.GetCategory();
+            List<Category> categorylist = new List<Category>();
+            foreach (CategoryDTO categorydto in categorydtos)
+            {
+                categorylist.Add(new Category(categorydto));
+            }
+            return categorylist;
+
+
         }
 
 

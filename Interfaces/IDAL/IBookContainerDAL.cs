@@ -38,11 +38,7 @@ namespace Interfaces.IDAL
         /// <param name="Booktitle"></param>
         /// <returns></returns>
         List<BookDTO> SearchBook(string Booktitle);
-        /// <summary>
-        /// die geeft alle categories
-        /// </summary>
-        /// <returns></returns>
-        List<CategoryDTO> GetCategory();
+       
         
 
 

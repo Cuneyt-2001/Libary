@@ -1,0 +1,1 @@
+﻿Ik heb hier bookcategorydto gebruikt. Dat wordt gebruikt bij unittesten.

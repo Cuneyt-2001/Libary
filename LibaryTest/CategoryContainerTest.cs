@@ -92,7 +92,7 @@ namespace LibaryTest
         }
 
         [TestMethod]
-        public void GetBookCategoriesByBookId()
+        public void PreventDoublecategory()
         {
             //Arrange
 
@@ -100,19 +100,15 @@ namespace LibaryTest
             CategoryContainer categorycontainer = new CategoryContainer(categorycontainermock);
 
             //Act
-            var categorieslist = categorycontainer.GetBookCategoriesByBookId(4);
-            var getbook = categorieslist[0];
+            var categoryname = categorycontainer.PreventDoublecategory("Horror");
+           
+         
             //Assert
 
-            Assert.AreEqual(getbook.CategoryID, categorycontainermock.bookcategories[0].CategoryID);
+            Assert.IsFalse(categoryname);
+            Assert.AreEqual("Horror", categorycontainermock.categories.FirstOrDefault().CategoryName);
 
 
-        }
-
-        [TestMethod]
-        public void GetAllCategoriesByID()
-        {
-            throw new NotImplementedException();
 
         }
     }

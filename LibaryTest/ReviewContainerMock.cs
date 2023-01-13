@@ -16,7 +16,9 @@ namespace LibaryTest
             ReviewDTO review1 = new ReviewDTO()
             {
                 ReviewID = 1,
+                BookID = 1,
                 Review = "Super"
+               
                
 
 
@@ -24,11 +26,14 @@ namespace LibaryTest
             ReviewDTO review2 = new ReviewDTO()
             {
                 ReviewID = 2,
+                BookID= 1,
                 Review = "Wat saai"
 
             };
+          
             reviews.Add(review1);
             reviews.Add(review2);
+           
 
 
         }
@@ -37,6 +42,12 @@ namespace LibaryTest
         {
             reviews.Add(reviewDTO);
            return true;
+        }
+
+        public List<ReviewDTO> GetReview(int id)
+        {
+           List<ReviewDTO> review=reviews.FindAll(x => x.BookID == id);
+            return review;
         }
     }
 }

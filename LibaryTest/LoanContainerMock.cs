@@ -69,10 +69,5 @@ namespace LibaryTest
 
 
         }
-
-        List<LoanDTO> ILoanContainerDAL.CheckAvailibilityofBook(LoanDTO loan)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -14,12 +14,10 @@
 }
     </style>
   <p class="boldTextClass"> Are you sure you want to delete "@Model.BookTitle"?</p> 
-  @*  <h3>DeleteBook</h3>*@
     <form asp-action="RemoveBook" method="Post">
         <div class="form-group">
 
             <input type="hidden" asp-for="BookID" />
-           @* <input type="text" class="form-control" id="BookID" name="BookID"/>*@
        </div>
      
          <div class="form-group">

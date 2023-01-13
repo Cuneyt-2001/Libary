@@ -25,28 +25,12 @@ namespace _Libary.Controllers
         }
 
         public IActionResult Index()
-        {//
-         //var userIdString = HttpContext.Session.GetString("UserName");
-         //if(_user.Checkinformation(_userViewModel.Email,_userViewModel.Password)==true)
-         //{
-         //    ViewData["UserName"] =_container.GetUserNameByEmail(_userViewModel.Email);
-         //var username = _container.GetUserNameByEmail(_userViewModel.Email);
-         //ViewData["username"] = username;
-         // HttpContext.Session.SetString("UserName",username );
-         //
-
-
+        {
             ViewBag.Success = TempData["Success"];
             TempData.Remove("Success");
             ViewBag.Message = TempData["Message"];
             TempData.Remove("Message");
             return View();
-           
-
-
-
-           
-
 
         }
 

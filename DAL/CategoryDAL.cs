@@ -12,7 +12,7 @@ namespace DAL
 {
     public class CategoryDAL : ICategoryContainerDAL
     {
-
+      
         public bool AddCategory(CategoryDTO categoryDTO)
         {
             try
@@ -21,10 +21,11 @@ namespace DAL
                 if (command.Connection.State != ConnectionState.Open)
                 {
                     command.Connection.Open();
-                    command.Parameters.AddWithValue("@CategoryName", categoryDTO.CategoryName);
-
+                    
 
                 }
+                command.Parameters.AddWithValue("@CategoryName", categoryDTO.CategoryName);
+
                 return command.ExecuteNonQuery() > 0;
             }
             catch (Exception exception)
@@ -102,7 +103,7 @@ namespace DAL
                 {
 
                     CategoryDTO dto = new CategoryDTO();
-                    //dto.BookID = Convert.ToInt32(reader["BookID"]);
+                    
                     dto.CategoryID = Convert.ToInt32(reader["CategoryID"]);
                     dto.CategoryName = Convert.ToString(reader["CategoryName"]);
                     bookCategories.Add(dto);
@@ -211,16 +212,55 @@ namespace DAL
 
             var result = $"select count(*) from Category where CategoryName = @CategoryName";
             var com = new SqlCommand(result, Connection.connection);
+            com.Parameters.AddWithValue("@CategoryName",categoryname);  
             if (com.Connection.State != ConnectionState.Open)
             {
                 com.Connection.Open();
 
             }
-           if(result.Contains(categoryname))
+
+            int count = (Int32) com.ExecuteScalar();
+           if(count>0)
             {
                 return false;
             }
             return true;
+        }
+        public List<CategoryDTO> GetCategory()
+        {
+            try
+            {
+                List<CategoryDTO> categorylist = new List<CategoryDTO>();
+                SqlCommand comand = new SqlCommand("select * from[Category]", Connection.connection);
+
+                if (comand.Connection.State != ConnectionState.Open)
+                {
+                    comand.Connection.Open();
+                }
+
+                SqlDataReader reader = comand.ExecuteReader();
+                while (reader.Read())
+                {
+
+                    CategoryDTO categoryDTO = new CategoryDTO();
+                    categoryDTO.CategoryID = Convert.ToInt32(reader["CategoryID"]);
+                    categoryDTO.CategoryName = Convert.ToString(reader["CategoryName"]);
+
+                    categorylist.Add(categoryDTO);
+                }
+                reader.Close();
+
+                return categorylist;
+            }
+
+            catch (Exception exception)
+            {
+                throw exception;
+
+            }
+            finally
+
+            { Connection.connection.Close(); }
         }
     }
 }

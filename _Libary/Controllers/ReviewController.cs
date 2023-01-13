@@ -4,6 +4,7 @@ using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace _Libary.Controllers
 {
@@ -11,19 +12,19 @@ namespace _Libary.Controllers
     {
         ReviewContainer reviewContainer = new ReviewContainer(new ReviewDAL());
         BookContainer bookContainer = new BookContainer(new BookDAL());
-      
+
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult AddReview(int id )
+        public IActionResult AddReview(int id)
         {
             var role = HttpContext.Session.GetString("Role");
             if (role == "True" || role == null)
             {
-              
+
                 return RedirectToAction("Login", "User");
 
             }
@@ -32,7 +33,7 @@ namespace _Libary.Controllers
             ViewBag.BookTitle = book.BookTitle;
 
             return View(review);
-           
+
         }
 
         [HttpPost]
@@ -48,7 +49,7 @@ namespace _Libary.Controllers
                     review.UserID = Convert.ToInt32(userIdString);
                     review.Review = model.Review;
                     review.BookID = model.BookID;
-                    if(review.BookID==0)
+                    if (review.BookID == 0)
                     {
                         return RedirectToAction("index", "Loan");
 
@@ -66,10 +67,10 @@ namespace _Libary.Controllers
                 {
                     var book = bookContainer.GetBook(model.BookID);
                     ViewBag.BookTitle = book.BookTitle;
-                    return View(); 
+                    return View();
 
                 }
-            
+
             }
             catch
             {
@@ -79,6 +80,34 @@ namespace _Libary.Controllers
                 ViewBag.message = "Your Review didn't saved";
                 return View();
             }
+        }
+        [HttpGet]
+        public IActionResult ViewReview(int id)
+        {
+            List<ReviewViewModel> reviewViewModels = new List<ReviewViewModel>();
+            List<Review_> reviews = reviewContainer.GetReview(id);
+            foreach (Review_ review in reviews)
+            {
+
+                reviewViewModels.Add(new ReviewViewModel(review));
+            }
+
+            if (reviewViewModels.Count == 0)
+            {
+                ViewBag.Success = false;
+                ViewBag.message = "There is no review for this book";
+                return View();
+
+
+
+            }
+
+            return View(reviewViewModels);
+
+
+
+
+
         }
 
 

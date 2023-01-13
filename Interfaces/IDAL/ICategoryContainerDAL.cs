@@ -47,6 +47,11 @@ namespace Interfaces.IDAL
         /// <param name="categoryname"></param>
         /// <returns></returns>
         public bool PreventDoublecategory(string categoryname);
+        /// <summary>
+        /// Geeft lijst van de categories.
+        /// </summary>
+        /// <returns></returns>
+        public List<CategoryDTO> GetCategory();
 
     }
 }

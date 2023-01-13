@@ -137,11 +137,6 @@ namespace DAL
             { Connection.connection.Close(); }
         }
 
-        public BookDTO GetReview(int bookid)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool RemoveBook(int bookid)
         {
             try
@@ -205,42 +200,7 @@ namespace DAL
         }
 
 
-        public List<CategoryDTO>GetCategory()
-        {
-            try
-            {
-                List<CategoryDTO> categorylist = new List<CategoryDTO>();
-                SqlCommand comand = new SqlCommand("select * from[Category]", Connection.connection);
-
-                if (comand.Connection.State != ConnectionState.Open)
-                {
-                    comand.Connection.Open();
-                }
-
-                SqlDataReader reader = comand.ExecuteReader();
-                while (reader.Read())
-                {
-
-                    CategoryDTO categoryDTO = new CategoryDTO();
-                    categoryDTO.CategoryID = Convert.ToInt32(reader["CategoryID"]);
-                    categoryDTO.CategoryName = Convert.ToString(reader["CategoryName"]);
-
-                    categorylist.Add(categoryDTO);
-                }
-                reader.Close();
-
-                return categorylist;
-            }
-
-            catch (Exception exception)
-            {
-                throw exception;
-              
-            }
-            finally
-
-            { Connection.connection.Close(); }
-        }
+       
 
 
 

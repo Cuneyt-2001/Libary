@@ -49,18 +49,7 @@ namespace Business
             return new Book(bookdto);
 
         }
-        public List<Category> GetCategories()
-        {
-            List<CategoryDTO> categorydtos = _bookContainerDAL.GetCategory();
-            List<Category> categorylist = new List<Category>();
-            foreach (CategoryDTO categorydto in categorydtos)
-            {
-                categorylist.Add(new Category(categorydto));
-            }
-            return categorylist;
-
-
-        }
+     
 
   
     public List<Book> SearchBook(string Booktitle)

@@ -15,5 +15,11 @@ namespace Interfaces.IDAL
         /// <param name="reviewDTO"></param>
         /// <returns></returns>
         bool AddReview(ReviewDTO reviewDTO);
+        /// <summary>
+        /// Via deze methode kan de gberuiker reviews zien voor gekozen boek.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<ReviewDTO> GetReview(int id);
     }
 }

@@ -18,13 +18,14 @@ namespace LibaryTest
 
             CategoryDTO categorydto = new CategoryDTO()
             {
-              CategoryID = 1,
-              CategoryName="Horror"
+                CategoryID = 1,
+                CategoryName = "Horror"
 
             };
             CategoryDTO categorydto2 = new CategoryDTO()
-            {CategoryID = 2,
-            CategoryName="Funny"
+            {
+                CategoryID = 2,
+                CategoryName = "Funny"
 
             };
             categories.Add(categorydto);
@@ -64,14 +65,14 @@ namespace LibaryTest
         {
             categories.Add(categoryDTO);
             return true;
-                
-                  
+
+
         }
         /* check  */
         public List<CategoryDTO> GetAllCategoriesByIds(List<int> ids)
         {
-          
-            throw new NotImplementedException();    
+
+            throw new NotImplementedException();
         }
         /* completed ! */
         public List<BookCategoryDTO> GetBookCategoriesByBookId(int bookid)
@@ -79,6 +80,23 @@ namespace LibaryTest
             List<BookCategoryDTO> getcategoriesbybookid = bookcategories.FindAll(x => x.BookID == bookid);
             return getcategoriesbybookid;
 
+
+        }
+
+        public List<CategoryDTO> GetCategory()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool PreventDoublecategory(string categoryname)
+        {
+            CategoryDTO name = categories.Find(x => x.CategoryName == categoryname);
+            if (name.CategoryName != null)
+            {
+                return false;
+
+            }
+            return true;   
 
         }
 

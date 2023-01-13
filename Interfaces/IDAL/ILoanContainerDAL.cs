@@ -15,15 +15,7 @@ namespace Interfaces.IDAL
         /// <param name="loan"></param>
         /// <returns></returns>
         bool AddLoan(LoanDTO loan);
-        //List<BookDTO> GetAllBooks();
-        //List<BookDTO> SearchBook(string booktitle);
-        //BookDTO GetBook(int bookid);
-        /// <summary>
-        /// De methode geeft aan of het boek beschikbaar is.
-        /// </summary>
-        /// <param name="loan"></param>
-        /// <returns></returns>
-        List<LoanDTO> CheckAvailibilityofBook(LoanDTO loan);
+      
         /// <summary>
         /// De methode geeft de lijst van alle leningen 
         /// </summary>
